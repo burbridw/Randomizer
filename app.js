@@ -26,6 +26,7 @@ let numbersArr = []
 let randomArr = []
 let active = false
 let numberCount = 0
+let numObj = {}
 
 const keys = [7, 8, 9, 4, 5, 6, 1, 2, 3, "C", 0, "del"]
 
@@ -102,7 +103,10 @@ function startDisplay(from, to) {
         numbersArr.push(Number(newNum))
         newNum++
     }
-
+    numObj = {}
+    for ( let i = 0; i < numbersArr.length; i++ ) {
+        numObj[numbersArr[i]] = false
+    }
     randomArr = numbersArr.slice(0, numbersArr.length)
     randomArr.sort( () => { return 0.5 - Math.random() } )
     setupDisplay.classList.add("reduced")
@@ -114,12 +118,6 @@ function startDisplay(from, to) {
             <div class="small-number">${numbersArr[i]}</div>
             `
         }
-        let allSmallNumbers = document.querySelectorAll(".small-number")
-        allSmallNumbers.forEach( (x)=>{
-            x.addEventListener("click",()=>{
-                currentNumber.textContent = x.textContent
-            })
-        })
     } else {
         largeNumbers = true
         for ( let i = 0; i < 40; i++) {
@@ -130,16 +128,17 @@ function startDisplay(from, to) {
     }
 }
 
-nextBtn.addEventListener("click",()=>{
+nextBtn.addEventListener("click",callNext)
+
+function callNext() {
     if ( active ) {
         currentNumber.textContent = randomArr[numberCount]
+        numObj[randomArr[numberCount]] = true
         let getIndex = numbersArr.indexOf(randomArr[numberCount])
         if ( !largeNumbers ) {
             allNumbersGrid.children[getIndex].classList.add("called")
-        } else {
-            if ( numberCount < 40 ) {
-                allNumbersGrid.children[numberCount].textContent = randomArr[numberCount]
-            }
+        } else if ( numberCount < 40 ) {
+            allNumbersGrid.children[numberCount].textContent = randomArr[numberCount]
         }
         if ( numberCount >= 1 ) {
             last1.textContent = randomArr[numberCount - 1]
@@ -150,12 +149,12 @@ nextBtn.addEventListener("click",()=>{
         if ( numberCount >= 3 ) {
             last3.textContent = randomArr[numberCount - 3]
         }
-        numberCount++
-        if ( numberCount >= randomArr.length ) {
-            active = false
-        }
     }
-})
+    numberCount++
+    if ( numberCount >= randomArr.length ) {
+        active = false
+    }
+}
 
 restartBtn.addEventListener("click",()=>{
     active = true
