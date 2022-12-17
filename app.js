@@ -130,6 +130,14 @@ function startDisplay(from, to) {
 
 nextBtn.addEventListener("click",callNext)
 
+window.addEventListener("keydown",(e)=>{
+    if ( active ) {
+        if ( e.key === "Enter" ) {
+            callNext()
+        }
+    }
+})
+
 function callNext() {
     if ( active ) {
         currentNumber.textContent = randomArr[numberCount]
