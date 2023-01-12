@@ -43,6 +43,7 @@ body {
  background-color: #e1da9f;
 
 }
+
 .select-from-left,.select-to-left {
     width: 50%;
     height: 100%;
@@ -245,4 +246,52 @@ body {
     display: none;
     box-shadow: none;
     border: none;
+}
+@media (orientation: portrait) {
+    .select-from,.select-to {
+        display: block;
+    }
+    .select-from-left,.select-to-left {
+        height: 20%;
+        width: 100%;
+    }
+    .select-text {
+        font-size: 2rem;
+    }
+    .select-from-number-box,.select-to-number-box {
+        height: 35%;
+        font-size: 2rem;
+    }
+    .select-from-keypad-container,.select-to-keypad-container {
+        height: 70%;
+    }
+    .main-display {
+        flex-wrap: wrap;
+        overflow: scroll;
+    }
+    .main-right,.main-left {
+        width: 100vw;
+    }
+    .main-left {
+        height: 30%;
+    }
+    .main-right {
+        height: 60%;
+    }
+    .control-panel {
+        height: 50%;
+    }
+    .reset-button,.restart-button {
+        font-size: 1.5rem;
+    }
+    .all-numbers-container {
+        height: 50%;
+    }
+    .last-number-container {
+        height: 20%;
+    }
+    .current-number-container {
+        font-size: 15rem;
+        height: 80%;
+    }
 }
